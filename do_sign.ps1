@@ -16,9 +16,9 @@ Import-Module $ScriptDir\..\BuildSupport\checked-copy.psm1
 function sign ($arch, $name) { 
     Write-Host "signing with [$certname] crosssign [$crosssign]"
     if ($crosssign) {
-        Invoke-CommandChecked "$arch signtool " ($signtool+"\signtool.exe") sign /v /a /s my /n ('"'+$certname+'"') /t http://timestamp.verisign.com/scripts/timestamp.dll /ac $crosssign $name 
+        Invoke-CommandChecked "$arch signtool " ($signtool+"\signtool.exe") sign /fc SHA256 /v /a /s my /n ('"'+$certname+'"') /t http://timestamp.verisign.com/scripts/timestamp.dll /ac $crosssign $name 
     } else {
-        Invoke-CommandChecked "$arch signtool " ($signtool+"\signtool.exe") sign /v /a /s my /n ('"'+$certname+'"') /t http://timestamp.verisign.com/scripts/timestamp.dll  $name 
+        Invoke-CommandChecked "$arch signtool " ($signtool+"\signtool.exe") sign /fc SHA256 /v /a /s my /n ('"'+$certname+'"') /t http://timestamp.verisign.com/scripts/timestamp.dll  $name 
     }
 }
 
